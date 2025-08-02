@@ -1,15 +1,41 @@
-// @ts-check
-
-import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'astro/config';
-
+import path from 'node:path';
+import node from '@astrojs/node';
 import react from '@astrojs/react';
+import clerk from '@clerk/astro';
+import tailwindcss from '@tailwindcss/vite';
+
+// @ts-check
+import { defineConfig, envField } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: node({
+    mode: 'standalone',
+  }),
+  output: 'server',
   vite: {
-      plugins: [tailwindcss()],
-	},
-
-  integrations: [react()],
+    plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@': path.resolve('./src'),
+        '~': path.resolve('./'),
+      },
+    },
+  },
+  integrations: [react(), clerk()],
+  env: {
+    schema: {
+      // client
+      PUBLIC_BASE_URL: envField.string({ context: 'server', access: 'secret', default: 'http://localhost:4321' }),
+      PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({ context: 'server', access: 'secret', default: 'pk_test_placeholder' }),
+      // server
+      CLERK_SECRET_KEY: envField.string({ context: 'server', access: 'secret', required: true }),
+      CLERK_ACCOUNTS_URL: envField.string({ context: 'server', access: 'secret', required: true }),
+      AWS_ACCESS_KEY_ID: envField.string({ context: 'server', access: 'secret', required: true }),
+      AWS_SECRET_ACCESS_KEY: envField.string({ context: 'server', access: 'secret', required: true }),
+      DATABASE_URL: envField.string({ context: 'server', access: 'secret', default: 'file:/app/data/database.db' }),
+      DATABASE_SYNC_URL: envField.string({ context: 'server', access: 'secret', required: true }),
+      DATABASE_TOKEN: envField.string({ context: 'server', access: 'secret', required: true }),
+    },
+  },
 });

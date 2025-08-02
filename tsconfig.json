@@ -5,9 +5,18 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "node_modules"
   ],
   "compilerOptions": {
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "~/*": [
+        "./*"
+      ]
+    },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   }

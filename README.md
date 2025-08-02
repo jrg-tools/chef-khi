@@ -1,13 +1,39 @@
-# Astro with Tailwind
+# Chef Khỉ
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/jrg-tools/chef-khi/refs/heads/main/public/logo.webp" alt="Chef Khỉ Logo" width="200">
+</p>
+
+<p align="center">
+    <a href="https://status.jrg.tools/status/chef-khi"><img src="https://status.jrg.tools/api/badge/9/status" alt="Status" /></a>
+    <img src="https://status.jrg.tools/api/badge/9/uptime" alt="Uptime" />
+    <img src="https://status.jrg.tools/api/badge/9/avg-response" alt="Average Response Time" />
+</p>
+
+> [!WARNING]
+> Set up the repository with the proper hooks. Run `pre-commit install` in the root directory of the repository.
+
+Chef Khỉ is a cooking project aimed at sharing delicious and easy-to-make recipes, inspiring everyone to enjoy the art of cooking.
+
+**Stack:**
+
+- **Main:** Astro + React islands
+- **Styling:** Tailwind CSS (Shadcn UI)
+- **Authentication:** Clerk
+- **Database:** Turso
+- **Deployment:** Docker + Docker Compose (VPS)
+
+## Local development
 
 ```sh
-pnpm create astro@latest -- --template with-tailwindcss
+$ pnpm i
+$ pnpm dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/with-tailwindcss)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/with-tailwindcss)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/with-tailwindcss/devcontainer.json)
+### Environment variables
 
-Astro comes with [Tailwind](https://tailwindcss.com) support out of the box. This example showcases how to style your Astro project with Tailwind.
+Copy the `.env.sample` file to `.env` and fill in the required environment variables.
 
-For complete setup instructions, please see our [Tailwind Integration Guide](https://docs.astro.build/en/guides/integrations-guide/tailwind).
+## 🚀 Deployment
+
+The deployment is triggered automatically on **pushes to the main branch**.
