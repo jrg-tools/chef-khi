@@ -1,5 +1,5 @@
 interface ImportMetaEnv {
-  readonly PUBLIC_BASE_URL: string;
+  readonly BASE_URL: string;
   readonly PUBLIC_CLERK_PUBLISHABLE_KEY: string;
   readonly CLERK_SECRET_KEY: string;
   readonly CLERK_ACCOUNTS_URL: string;

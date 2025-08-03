@@ -19,6 +19,10 @@ RUN pnpm install --frozen-lockfile
 
 # Build stage
 FROM build-deps AS build
+## Accept build argument
+ARG PUBLIC_CLERK_PUBLISHABLE_KEY
+## Set it as environment variable for the build process
+ENV PUBLIC_CLERK_PUBLISHABLE_KEY=$PUBLIC_CLERK_PUBLISHABLE_KEY
 COPY . .
 RUN pnpm run build
 

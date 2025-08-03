@@ -2,10 +2,9 @@ services:
   chef-khi:
     image: ghcr.io/jrg-tools/chef-khi:latest
     # ports:
-      # - 4321
+    #   - "4321:4321"
     environment:
-      - PUBLIC_BASE_URL=${PUBLIC_BASE_URL}
-      - PUBLIC_CLERK_PUBLISHABLE_KEY=${PUBLIC_CLERK_PUBLISHABLE_KEY}
+      - BASE_URL=${BASE_URL}
       - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
       - CLERK_ACCOUNTS_URL=${CLERK_ACCOUNTS_URL}
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}

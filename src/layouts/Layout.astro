@@ -5,7 +5,7 @@ import Navbar from '@/components/core/Navbar.astro';
 import Footer from '@/components/core/Footer.astro';
 import { DESCRIPTION, TITLE } from '@/lib/constants';
 import '@/styles/global.css';
-import { PUBLIC_BASE_URL } from 'astro:env/server';
+import { BASE_URL } from 'astro:env/client';
 
 interface Props {
   description?: string;
@@ -29,7 +29,7 @@ const { description = DESCRIPTION, title = TITLE } = Astro.props;
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <link rel="canonical" href={PUBLIC_BASE_URL} />
+    <link rel="canonical" href={BASE_URL} />
 
     <!-- SEO Indexing -->
     <meta name="robots" content="index, follow" />
@@ -39,17 +39,17 @@ const { description = DESCRIPTION, title = TITLE } = Astro.props;
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={PUBLIC_BASE_URL} />
+    <meta property="og:url" content={BASE_URL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${PUBLIC_BASE_URL}/logo.webp`} />
+    <meta property="og:image" content={`${BASE_URL}/logo.webp`} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={PUBLIC_BASE_URL} />
+    <meta name="twitter:url" content={BASE_URL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${PUBLIC_BASE_URL}/logo.webp`} />
+    <meta name="twitter:image" content={`${BASE_URL}/logo.webp`} />
   </head>
   <body class="flex min-h-screen flex-col">
     <Navbar />

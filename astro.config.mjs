@@ -13,6 +13,9 @@ export default defineConfig({
     mode: 'standalone',
   }),
   output: 'server',
+  security: {
+    checkOrigin: false,
+  },
   vite: {
     plugins: [tailwindcss()],
     resolve: {
@@ -26,8 +29,8 @@ export default defineConfig({
   env: {
     schema: {
       // client
-      PUBLIC_BASE_URL: envField.string({ context: 'server', access: 'secret', default: 'http://localhost:4321' }),
-      PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({ context: 'server', access: 'secret', default: 'pk_test_placeholder' }),
+      PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({ context: 'client', access: 'public', required: true }),
+      BASE_URL: envField.string({ context: 'client', access: 'public', default: 'http://localhost:4321', url: true }),
       // server
       CLERK_SECRET_KEY: envField.string({ context: 'server', access: 'secret', required: true }),
       CLERK_ACCOUNTS_URL: envField.string({ context: 'server', access: 'secret', required: true }),
