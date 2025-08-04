@@ -11,8 +11,10 @@ dist/
 .astro/
 .output/
 build/
+.out/
 
 # Environment variables
+.envrc
 .env
 .env.local
 .env.development.local

@@ -37,3 +37,33 @@ Copy the `.env.sample` file to `.env` and fill in the required environment varia
 ## 🚀 Deployment
 
 The deployment is triggered automatically on **pushes to the main branch**.
+
+## Example Docker Compose
+
+```yaml
+services:
+  chef-khi:
+    image: ghcr.io/jrg-tools/chef-khi:latest
+    environment:
+      - BASE_URL=${BASE_URL}
+      - PUBLIC_CLERK_PUBLISHABLE_KEY=${PUBLIC_CLERK_PUBLISHABLE_KEY}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - CLERK_ACCOUNTS_URL=${CLERK_ACCOUNTS_URL}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - DATABASE_SYNC_URL=${DATABASE_SYNC_URL}
+      - DATABASE_TOKEN=${DATABASE_TOKEN}
+      # - DATABASE_URL=${DATABASE_URL} # Defaults to: file:/app/data/database.db
+    volumes:
+      - sqlite_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:4321/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  sqlite_data:
+```

@@ -1,13 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+
+// <xxx server:defer>
+//   <placeholder slot="fallback" />
+// </xxx>;
+export const prerender = true;
 ---
 
 <Layout>
   <main
-    class="max-w-screen-md px-4 mb-24 object-center m-auto text-center select-none"
+    class="m-auto mb-24 max-w-screen-md object-center px-4 text-center select-none"
   >
-    <section class="mt-24 md:mt-32 mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+    <section class="mt-24 mb-12 md:mt-32">
+      <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">
         Chef Khỉ
       </h1>
     </section>

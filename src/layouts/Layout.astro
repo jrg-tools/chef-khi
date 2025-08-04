@@ -4,8 +4,9 @@ import '@fontsource-variable/inter';
 import Navbar from '@/components/core/Navbar.astro';
 import Footer from '@/components/core/Footer.astro';
 import { DESCRIPTION, TITLE } from '@/lib/constants';
+import { ClerkTheme } from '@/components/core/ClerkTheme';
+import { BASE_URL } from 'astro:env/server';
 import '@/styles/global.css';
-import { BASE_URL } from 'astro:env/client';
 
 interface Props {
   description?: string;
@@ -52,6 +53,7 @@ const { description = DESCRIPTION, title = TITLE } = Astro.props;
     <meta name="twitter:image" content={`${BASE_URL}/logo.webp`} />
   </head>
   <body class="flex min-h-screen flex-col">
+    <ClerkTheme />
     <Navbar />
     <section class="flex-grow pt-16">
       <slot />

@@ -1,4 +1,5 @@
 # build output
+.out/
 dist/
 # generated types
 .astro/
@@ -14,6 +15,7 @@ pnpm-debug.log*
 
 
 # environment variables
+.envrc
 .env
 .env.production
 
