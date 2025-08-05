@@ -12,9 +12,6 @@ export default defineConfig({
     mode: 'standalone',
   }),
   output: 'server',
-  security: {
-    checkOrigin: false,
-  },
   vite: {
     plugins: [tailwindcss()],
     resolve: {
