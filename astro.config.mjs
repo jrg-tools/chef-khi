@@ -35,10 +35,10 @@ export default defineConfig({
   env: {
     schema: {
       // client
-      PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({ context: 'client', access: 'public', default: '' }),
+      PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({ context: 'client', access: 'public' }),
       // server
       BASE_URL: envField.string({ context: 'server', access: 'secret', default: 'http://localhost:4321', url: true }),
-      CLERK_SECRET_KEY: envField.string({ context: 'server', access: 'secret', default: '' }),
+      CLERK_SECRET_KEY: envField.string({ context: 'server', access: 'secret' }),
       CLERK_ACCOUNTS_URL: envField.string({ context: 'server', access: 'secret', default: 'https://accounts.clerk.com' }),
       AWS_ACCESS_KEY_ID: envField.string({ context: 'server', access: 'secret', default: '' }),
       AWS_SECRET_ACCESS_KEY: envField.string({ context: 'server', access: 'secret', default: '' }),

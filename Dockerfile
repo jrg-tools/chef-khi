@@ -21,7 +21,9 @@ RUN pnpm install --frozen-lockfile
 FROM build-deps AS build
 COPY . .
 RUN --mount=type=secret,id=PUBLIC_CLERK_PUBLISHABLE_KEY \
+    --mount=type=secret,id=CLERK_SECRET_KEY \
     export PUBLIC_CLERK_PUBLISHABLE_KEY=$(cat /run/secrets/PUBLIC_CLERK_PUBLISHABLE_KEY) && \
+    export CLERK_SECRET_KEY=$(cat /run/secrets/CLERK_SECRET_KEY) && \
     pnpm run build
 
 # Production image

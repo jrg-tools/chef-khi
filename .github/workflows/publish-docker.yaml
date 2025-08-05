@@ -55,3 +55,4 @@ jobs:
           cache-to: type=gha,mode=max
           secrets: |
             PUBLIC_CLERK_PUBLISHABLE_KEY=${{ secrets.PUBLIC_CLERK_PUBLISHABLE_KEY }}
+            CLERK_SECRET_KEY=${{ secrets.CLERK_SECRET_KEY }}

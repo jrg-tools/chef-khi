@@ -2,15 +2,16 @@
 import { TITLE } from '@/lib/constants';
 import {
   SignedIn,
+  SignedOut,
   UserButton,
   SignInButton,
-  SignedOut,
 } from '@clerk/astro/components';
 
 interface Props {
+  isStatic: boolean;
   title?: string;
 }
-const { title = TITLE } = Astro.props;
+const { title = TITLE, isStatic } = Astro.props;
 ---
 
 <header id="header-nav" class="fixed top-0 z-50 w-full px-6 py-4 select-none">
@@ -23,12 +24,12 @@ const { title = TITLE } = Astro.props;
     </a>
 
     <nav class="flex items-center gap-4">
-      <SignedIn>
+      <SignedOut isStatic={isStatic}>
+        <SignInButton mode="modal" />
+      </SignedOut>
+      <SignedIn isStatic={isStatic}>
         <UserButton />
       </SignedIn>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
     </nav>
   </div>
 </header>

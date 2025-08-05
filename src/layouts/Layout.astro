@@ -11,9 +11,14 @@ import Metadata from '@/components/core/Metadata.astro';
 interface Props {
   description?: string;
   title?: string;
+  isStatic?: boolean;
 }
 
-const { description = DESCRIPTION, title = TITLE } = Astro.props;
+const {
+  description = DESCRIPTION,
+  title = TITLE,
+  isStatic = true,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -49,7 +54,7 @@ const { description = DESCRIPTION, title = TITLE } = Astro.props;
   </head>
   <body class="flex min-h-screen flex-col">
     <ClerkTheme />
-    <Navbar server:defer />
+    <Navbar isStatic={isStatic} />
     <section class="flex-grow pt-16">
       <slot />
     </section>
