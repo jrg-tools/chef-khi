@@ -28,12 +28,10 @@ RUN --mount=type=secret,id=PUBLIC_CLERK_PUBLISHABLE_KEY \
 
 # Production image
 FROM node:lts-alpine AS runtime
-ENV HOST=0.0.0.0
-ENV PORT=4321
 
 WORKDIR /app
 
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 
-CMD node ./dist/server/entry.mjs
+CMD ["node", "./dist/server/entry.mjs", "--host", "0.0.0.0", "--port", "4321"]
