@@ -23,21 +23,28 @@ export default defineConfig({
         '~': path.resolve('./'),
       },
     },
+    define: {
+      'process.env.PUBLIC_CLERK_PUBLISHABLE_KEY': JSON.stringify(
+        process.env.PUBLIC_CLERK_PUBLISHABLE_KEY,
+      ),
+    },
   },
-  integrations: [react(), clerk()],
+  integrations: [react(), clerk({
+    secretKey: process.env.CLERK_SECRET_KEY,
+  })],
   env: {
     schema: {
       // client
-      PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({ context: 'client', access: 'public', required: true }),
+      PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({ context: 'client', access: 'public', default: '' }),
       // server
       BASE_URL: envField.string({ context: 'server', access: 'secret', default: 'http://localhost:4321', url: true }),
-      CLERK_SECRET_KEY: envField.string({ context: 'server', access: 'secret', required: true, default: '' }),
-      CLERK_ACCOUNTS_URL: envField.string({ context: 'server', access: 'secret', required: true, default: '' }),
-      AWS_ACCESS_KEY_ID: envField.string({ context: 'server', access: 'secret', required: true, default: '' }),
-      AWS_SECRET_ACCESS_KEY: envField.string({ context: 'server', access: 'secret', required: true, default: '' }),
+      CLERK_SECRET_KEY: envField.string({ context: 'server', access: 'secret', default: '' }),
+      CLERK_ACCOUNTS_URL: envField.string({ context: 'server', access: 'secret', default: 'https://accounts.clerk.com' }),
+      AWS_ACCESS_KEY_ID: envField.string({ context: 'server', access: 'secret', default: '' }),
+      AWS_SECRET_ACCESS_KEY: envField.string({ context: 'server', access: 'secret', default: '' }),
       DATABASE_URL: envField.string({ context: 'server', access: 'secret', default: 'file:/app/data/database.db' }),
-      DATABASE_SYNC_URL: envField.string({ context: 'server', access: 'secret', required: true, default: '' }),
-      DATABASE_TOKEN: envField.string({ context: 'server', access: 'secret', required: true, default: '' }),
+      DATABASE_SYNC_URL: envField.string({ context: 'server', access: 'secret', default: 'file:/app/data/sync.db' }),
+      DATABASE_TOKEN: envField.string({ context: 'server', access: 'secret', default: '' }),
     },
   },
 });

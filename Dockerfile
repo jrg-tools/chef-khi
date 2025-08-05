@@ -19,12 +19,10 @@ RUN pnpm install --frozen-lockfile
 
 # Build stage
 FROM build-deps AS build
-## Accept build argument
-ARG PUBLIC_CLERK_PUBLISHABLE_KEY
-## Set it as environment variable for the build process
-ENV PUBLIC_CLERK_PUBLISHABLE_KEY=$PUBLIC_CLERK_PUBLISHABLE_KEY
 COPY . .
-RUN pnpm run build
+RUN --mount=type=secret,id=PUBLIC_CLERK_PUBLISHABLE_KEY \
+    export PUBLIC_CLERK_PUBLISHABLE_KEY=$(cat /run/secrets/PUBLIC_CLERK_PUBLISHABLE_KEY) && \
+    pnpm run build
 
 # Production image
 FROM node:lts-alpine AS runtime

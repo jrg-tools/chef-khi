@@ -1,7 +1,11 @@
 ---
 import { TITLE } from '@/lib/constants';
-// import { SignedIn, UserButton } from '@clerk/astro/react';
-import { SignedIn, UserButton } from '@clerk/astro/components';
+import {
+  SignedIn,
+  UserButton,
+  SignInButton,
+  SignedOut,
+} from '@clerk/astro/components';
 
 interface Props {
   title?: string;
@@ -19,9 +23,12 @@ const { title = TITLE } = Astro.props;
     </a>
 
     <nav class="flex items-center gap-4">
-      <SignedIn server:defer isStatic>
+      <SignedIn>
         <UserButton />
       </SignedIn>
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
     </nav>
   </div>
 </header>
