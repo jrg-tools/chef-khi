@@ -34,8 +34,9 @@ WORKDIR /app
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 
+ENV NODE_ENV=production
 ENV HOST=0.0.0.0
-ENV PORT=4321
-EXPOSE 4321
+ENV PORT=80
+EXPOSE 80/tcp
 
-CMD ["node", "./dist/server/entry.mjs", "--host", "0.0.0.0", "--port", "4321"]
+ENTRYPOINT ["node", "./dist/server/entry.mjs"]
