@@ -53,7 +53,7 @@ const {
     <Metadata server:defer />
   </head>
   <body class="flex min-h-screen flex-col">
-    <ClerkTheme />
+    <ClerkTheme client:load />
     <Navbar isStatic={isStatic} />
     <section class="flex-grow pt-16">
       <slot />
