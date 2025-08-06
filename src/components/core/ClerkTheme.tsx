@@ -1,12 +1,13 @@
+'use client';
 import { updateClerkOptions } from '@clerk/astro/client';
 import { dark } from '@clerk/themes';
 import { useEffect } from 'react';
 
 export function ClerkTheme() {
   useEffect(() => {
-    // Function to update Clerk appearance based on Tailwind's dark mode
+    // Function to update Clerk appearance based on media query
     const updateTheme = () => {
-      const isDark = document.documentElement.classList.contains('dark');
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       updateClerkOptions({
         appearance: {
           baseTheme: isDark ? dark : undefined,
@@ -17,15 +18,25 @@ export function ClerkTheme() {
     // Initial theme sync
     updateTheme();
 
-    // Listen for changes to the class attribute on <html>
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
+    // Create media query listener
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // Cleanup observer on unmount
-    return () => observer.disconnect();
+    // Listen for changes to the media query
+    const handleChange = (e: any) => {
+      updateClerkOptions({
+        appearance: {
+          baseTheme: e.matches ? dark : undefined,
+        },
+      });
+    };
+
+    // Add listener (using addEventListener for modern browsers)
+    mediaQuery.addEventListener('change', handleChange);
+
+    // Cleanup listener on unmount
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
   }, []);
 
   // No UI needed, this is automatic.
